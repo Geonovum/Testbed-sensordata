@@ -46,7 +46,7 @@ let respecConfig = {
   editors:
     [
       {
-        name: "voornaam achternaam",
+        name: "Frank Terpstra",
         company: "Geonovum",
         companyURL: "https://www.geonovum.nl",
       }
@@ -72,6 +72,8 @@ let respecConfig = {
           uri: "template.pdf",
       },
   ],
+	
+
   // Lokale lijst voor bibliografie
   // - Kijk eerst naar de beschikbare www.specref.org .
   // - Kijk daarna in de organisatieconfig.
