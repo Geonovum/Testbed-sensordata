@@ -130,7 +130,7 @@ different visualisation and analytics technologies. There are some caveats, e.g.
  
 #### RIVM API
 * Upgrade the SensorThings server to a more actively maintained implementation. This would likely resolve all encountered issues. We’ve discussed this finding with RIVM, and RIVM is already planning to upgrade the server.
-* Enable CORS to allow web viewers to interact directly with the API without needing a backend. This involves including the `Access-Control-Allow-Headers: *` HTTP header in every response.
+* Enable CORS to allow web viewers to interact directly with the API without needing a backend. This involves including the `Access-Control-Allow-Origin: *` HTTP header in every response.
 
 #### SensorThings standard
 * Investigate ways to standardize observed properties and/or support conversions between units of measurement. For example, allow the user to specify the desired unit of temperature as Fahrenheit in a query parameter and let the API take care of Celsius to Fahrenheit conversion.
