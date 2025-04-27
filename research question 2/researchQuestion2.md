@@ -85,7 +85,7 @@ Currently every STA defines its own observed properties. For example temperature
 2. No support for multiple languages
 Descriptions for sensors and measured properties are not available in multiple languages by the SensorThings API. This seems missing in the specification. This may make it harder to use sensor data, especially when descriptions are provided in different languages depending on sensor location.
 
-#### RIVM
+#### RIVM API
 We worked with the RIVM Samenmeten API as the primary datasource for this use case. The implementation is based on 1.0 of the specification. RIVM uses the open source [GOST server](https://github.com/gost/server) which is currently not actively maintained and has several known issues. RIVM is aware of these issues and is planning to migrate to a different solution in the future.
 
 We encountered the following issues during our research:
