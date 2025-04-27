@@ -64,7 +64,7 @@ See the README in each repository for details. All source code is provided as op
 2. Select an area on the map and list sensor data.
 ![](images/viewer-3.png)
 3. Show measurements of sensor
-![](images/viewer-2.png)>
+![](images/viewer-2.png)
 
 ### Findings
 
@@ -107,9 +107,7 @@ Our research revealed the following findings:
 1. We started out with the [FROST SensorThings Datasource plugin](https://grafana.com/grafana/plugins/iosb-sensorthings-datasource/). This data source was easy to use but limited in its capabilities. It is only capable of displaying observations. We switched to the more generic [Infinity Data Source](https://grafana.com/docs/plugins/yesoreyeram-infinity-datasource/latest/) instead. This had the advantage of also being able to fetch other SensorThings endpoints like Locations, Things and ObservedProperties. We needed data from these endpoints to display maps and tables on our dashboard to allow the user to select one or more sensors. The Infinity data source is also more advanced compared to the FROST data  source as it supports other features of Grafana like alerting. Alerting is supported since it’s a so-called [Grafana backed plugin](https://grafana.com/developers/plugin-tools/key-concepts/backend-plugins).
 
 2. To meet the requirement for the interactive map, we were unable to use the [built-in Geomap component](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/geomap/) of Grafana since it doesn’t allow user interaction. In Grafana,
-it is more common to predefine a geographic visualisation and set-up different dashboards for different locations or areas (e.g. Netherlands/Germany). So it isn’t a common use case.
-
-As an alternative we used the [GeoMap Panel WMS plugin](https://grafana.com/grafana/plugins/felixrelleum-geomapwms-panel/). Despite its name this geomap component isn't limited to WMS datasources, it supports the same datasources as the built-in Grafana geomap component like OpenStreetMap. The GeoMap Panel component worked perfectly and allows the user to draw a polygon and thereby select one or more sensors (things) on a map.
+it is more common to predefine a geographic visualisation and set-up different dashboards for different locations or areas (e.g. Netherlands/Germany). So it isn’t a common use case. As an alternative we used the [GeoMap Panel WMS plugin](https://grafana.com/grafana/plugins/felixrelleum-geomapwms-panel/). Despite its name this geomap component isn't limited to WMS datasources, it supports the same datasources as the built-in Grafana geomap component like OpenStreetMap. The GeoMap Panel component worked perfectly and allows the user to draw a polygon and thereby select one or more sensors (things) on a map.
 
 #### Bespoke web viewer
 
