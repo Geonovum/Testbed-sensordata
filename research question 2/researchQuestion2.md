@@ -29,7 +29,7 @@ This research is conducted by [Mindloops BV](https://mindloops.nl). Mindloops is
 
 The viewers communicate with a SensorThings API and allow users to select sensors and view measurements. As a data source we used the [RIVM SamenMeten SensorThings API](https://www.samenmeten.nl/international/API). To prove that our viewer is able to handle SensorThings API in a generic way we’ve also added the [Fraunhofer Airquality SensorThings API](https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/) (as a bonus).
 
-TODO: plaatje hier
+![](images/architecture.png)
 
 We’ve applied a risk-driven approach in which we tackled the most complex things early on. This maximises the desired outcome within the available time. Also we used an iterative and agile approach with short feedback cycles to validate our results, which aligned with the bi-weekly meetings with GeoNovum.
 
@@ -40,35 +40,40 @@ Both viewers are delivered on a publicly accessible URL, which will be available
 - Dashboard application (Grafana): https://sensordata-dashboard.mindloops.io/
 - Web viewer: https://sensordata-viewer.mindloops.io/
 
-All source code needed to run both solutions on a local environment is delivered as open source. See the README in each repository for details. All source code is provided as open source under MIT license.
+All source code needed to run both solutions in a local environment is delivered as open source. 
+See the README in each repository for details. All source code is provided as open source under MIT license.
 
 - Dashboard application (Grafana): https://github.com/mindloops/sensordata-dashboard
 - Web viewer: https://github.com/mindloops/sensordata-web-ui
 
-#### Instructions for use
+#### Demo
 
-Dashboard application (Grafana):
-1. Selecting API source to use
-TODO: <screenshot>
-2. Selecting a specific sensor
-<screenshot>
-3. Select an area on the map and list sensor data.
-<screenshot>
-
-Web viewer:
+##### Dashboard application (Grafana)
 1. Selecting a specific sensor
-TODO: <screenshot>
-2. Select an area to show sensor data
-<screenshot>
+![](images/grafana-1.png)
+2. Select an area on the map and list sensor data.
+![](images/grafana-3.png)
+3. Show measurements of sensor
+![](images/grafana-2.png)
+4. Switch API source to use. Note: for the RIVM API the 'Use EWKT workaround' should be set on 'SRID=4326', while for the Fraunhofer API it should be empty.
+![](images/grafana-0.png)
+
+##### Web viewer
+1. Selecting a specific sensor
+![](images/viewer-1.png)
+2. Select an area on the map and list sensor data.
+![](images/viewer-3.png)
+3. Show measurements of sensor
+![](images/viewer-2.png)>
 
 ### Findings
 
 #### Overall
 
-The Sensorthings API provides a well-structured and easy to use API for consuming sensor data. There are several data structures in the API,
+The SensorThings API provides a well-structured and easy to use API for consuming sensor data. There are several data structures in the API,
 that are well interconnected and provide useful entries into a suite of sensor data. It is possible to query data in several useful ways, e.g.
 based on observed properties, geo location and/or time range. Additionally, it is also possible to combine API results dynamically as part of the
-OData standard that the Sensorthings API is based on. This makes it possible to combine data in a single API call, even though this is not
+OData standard that the SensorThings API is based on. This makes it possible to combine data in a single API call, even though this is not
 predefined in the API specification. That is very useful, especially for more standardized tools like Grafana, that need all relevant data in a single API response to work properly. (TODO hier wat voorbeelden neerzetten?)
 
 We experienced no major shortcomings in the SensorThings API standard. We identified the following (minor) improvements:
@@ -77,7 +82,7 @@ We experienced no major shortcomings in the SensorThings API standard. We identi
 Currently every STA defines its own observed properties. For example temperature is (re)defined in every single STA. There are no standard observed properties. The STA specification does allow observed properties to point to definitions but every STA implementation is free to pick their own definitions. This makes it harder for example to convert from one unit of measurement to another in a viewer.
 
 2. No support for multiple languages
-Descriptions for sensors and measured properties are not available in multiple languages by the Sensorthings API. This seems missing in the specification. This may make it harder to use sensor data, especially when descriptions are provided in different languages depending on sensor location.
+Descriptions for sensors and measured properties are not available in multiple languages by the SensorThings API. This seems missing in the specification. This may make it harder to use sensor data, especially when descriptions are provided in different languages depending on sensor location.
 
 #### RIVM
 We worked with the RIVM Samenmeten API as the primary datasource for this use case. The implementation is based on 1.0 of the specification. RIVM uses the open source [GOST server](https://github.com/gost/server) which is currently not actively maintained and has several known issues. RIVM is aware of these issues and is planning to migrate to a different solution in the future.
@@ -108,11 +113,11 @@ As an alternative we used the [GeoMap Panel WMS plugin](https://grafana.com/graf
 
 #### Bespoke web viewer
 
-A bespoke web app allows for more freedom in customisation and presenting the data visually. All components can be tailored to the Sensorthings API use case. The downside is that this may require more technical expertise, and no customisation is possible by end-users.
+A bespoke web app allows for more freedom in customization and presenting the data visually. All components can be tailored to the SensorThings API use case. The downside is that this may require more technical expertise, and no customisation is possible by end-users.
 
 Our research revealed the following findings:
 
-1. On request of GeoNovum we used AI code generation tools to help assist with the generation of several parts of the viewer. The AI tools we used (Amazon, Microsoft, Google) all understood Sensorthings API semantics in general and were able to provide initial implementations for them. It did require significant tuning, due to API implementation details sometimes missing or behaving differently, and AI tools not always properly providing solutions that had the right semantics. In summary, at the moment AI tools are useful for jumpstarting specific parts of the viewer, such as a table or map component, but are unlikely to provide meaningful results when tasked with creating an entire viewer from a single prompt. Still AI coding tools are very helpful and promising.
+1. On request of GeoNovum we used AI code generation tools to help assist with the generation of several parts of the viewer. The AI tools we used (Amazon, Microsoft, Google) all understood SensorThings API semantics in general and were able to provide initial implementations for them. It did require significant tuning, due to API implementation details sometimes missing or behaving differently, and AI tools not always properly providing solutions that had the right semantics. In summary, at the moment AI tools are useful for jumpstarting specific parts of the viewer, such as a table or map component, but are unlikely to provide meaningful results when tasked with creating an entire viewer from a single prompt. Still AI coding tools are very helpful and promising.
 
 2. As mentioned in the RIVM paragraph due to the CORS limitation in RIVM API, we couldn’t connect the web viewer directly to the RIVM API. Instead, we used
 an intermediate proxy on our own backend to work around this limitation.
@@ -125,12 +130,12 @@ different visualisation and analytics technologies. There are some caveats, e.g.
 ### Recommendations
  
 #### RIVM API
-* Upgrade the SensorThings server to a more actively maintained implementation. This would likely resolve all encountered issues. We’ve discussed this finding with RIVM and RIVM is already planning to upgrade the server.
+* Upgrade the SensorThings server to a more actively maintained implementation. This would likely resolve all encountered issues. We’ve discussed this finding with RIVM, and RIVM is already planning to upgrade the server.
 * Enable CORS to allow web viewers to interact directly with the API without needing a backend. This involves including the Access-Control-Allow-Headers: * HTTP header in every response.
 
 #### SensorThings standard
 * Investigate ways to standardize observed properties and/or support conversions between units of measurement. For example, allow the user to specify the desired unit of temperature as Fahrenheit in a query parameter and let the API take care of Celsius to Fahrenheit conversion.
-* Investigate ways to allow for internationalization (i18n). This can be accomplished by supporting the Accept-Language HTTP request header in line with [OGC API Common](https://docs.ogc.org/is/19-072/19-072.html#_98ff4350-10c4-454e-b5da-6802f1ad70d7).
+* Investigate ways to allow for internationalization (i18n). This can be achieved by supporting the Accept-Language HTTP request header in line with [OGC API Common](https://docs.ogc.org/is/19-072/19-072.html#_98ff4350-10c4-454e-b5da-6802f1ad70d7).
 
 
 
