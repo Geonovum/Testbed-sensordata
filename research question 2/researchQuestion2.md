@@ -70,7 +70,7 @@ See the README in each repository for details. All source code is provided as op
 
 #### Overall
 
-The SensorThings API provides a well-structured and easy to use API for consuming sensor data. There are several data structures in the API,
+The SensorThings API (STA) provides a well-structured and easy to use API for consuming sensor data. There are several data structures in the API,
 that are well interconnected and provide useful entries into a suite of sensor data. It is possible to query data in several useful ways, e.g.
 based on observed properties, geo location and/or time range. Additionally, it is also possible to combine API results dynamically as part of the
 OData standard that the SensorThings API is based on. This makes it possible to combine data in a single API call, even though this is not
@@ -129,11 +129,11 @@ different visualisation and analytics technologies. There are some caveats, e.g.
  
 #### RIVM API
 * Upgrade the SensorThings server to a more actively maintained implementation. This would likely resolve all encountered issues. We’ve discussed this finding with RIVM, and RIVM is already planning to upgrade the server.
-* Enable CORS to allow web viewers to interact directly with the API without needing a backend. This involves including the Access-Control-Allow-Headers: * HTTP header in every response.
+* Enable CORS to allow web viewers to interact directly with the API without needing a backend. This involves including the `Access-Control-Allow-Headers: *` HTTP header in every response.
 
 #### SensorThings standard
 * Investigate ways to standardize observed properties and/or support conversions between units of measurement. For example, allow the user to specify the desired unit of temperature as Fahrenheit in a query parameter and let the API take care of Celsius to Fahrenheit conversion.
-* Investigate ways to allow for internationalization (i18n). This can be achieved by supporting the Accept-Language HTTP request header in line with [OGC API Common](https://docs.ogc.org/is/19-072/19-072.html#_98ff4350-10c4-454e-b5da-6802f1ad70d7).
+* Investigate ways to allow for internationalization (i18n). This can be achieved by supporting the `Accept-Language` HTTP request header in line with [OGC API Common](https://docs.ogc.org/is/19-072/19-072.html#_98ff4350-10c4-454e-b5da-6802f1ad70d7).
 
 
 
