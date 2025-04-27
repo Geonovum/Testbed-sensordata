@@ -74,7 +74,8 @@ The SensorThings API (STA) provides a well-structured and easy to use API for co
 that are well interconnected and provide useful entries into a suite of sensor data. It is possible to query data in several useful ways, e.g.
 based on observed properties, geo location and/or time range. Additionally, it is also possible to combine API results dynamically as part of the
 OData standard that the SensorThings API is based on. This makes it possible to combine data in a single API call, even though this is not
-predefined in the API specification. That is very useful, especially for more standardized tools like Grafana, that need all relevant data in a single API response to work properly. (TODO hier wat voorbeelden neerzetten?)
+predefined in the API specification. That is very useful, especially for more standardized tools like Grafana, 
+that need all relevant data in a single API response to work properly.
 
 We experienced no major shortcomings in the SensorThings API standard. We identified the following (minor) improvements:
 
