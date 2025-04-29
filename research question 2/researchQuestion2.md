@@ -25,7 +25,7 @@ sufficient data and metadata detail to support connections to third party dashbo
 
 This research is conducted by [Mindloops BV](https://mindloops.nl). Mindloops is a boutique software consultancy specializing in software engineering. For nearly 10 years, Mindloops has proudly delivered solutions to clients such as the Dutch Police, the Dutch Railways (NS), The Netherlands’ Cadastre, Land Registry and Mapping Agency (Kadaster) and Dutch National Road Data Portal (NDW). Together with our clients and partners, Mindloops is committed to making a positive impact on society. Mindloops has a proven track record in building and running high-quality, mission-critical, bespoke software designed to last and evolve for decades. These data-intensive systems often require extensive integration with other systems, as well as data visualization.
 
-### Overall design and approach
+### Design and approach
 
 The viewers communicate with a SensorThings API and allow users to select sensors and view measurements. As a data source we used the [RIVM SamenMeten SensorThings API](https://www.samenmeten.nl/international/API). To prove that our viewer is able to handle SensorThings API in a generic way we’ve also added the [Fraunhofer Airquality SensorThings API](https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/) (as a bonus).
 
@@ -33,9 +33,9 @@ The viewers communicate with a SensorThings API and allow users to select sensor
 
 We’ve applied a risk-driven approach in which we tackled the most complex things early on. This maximises the desired outcome within the available time. Also we used an iterative and agile approach with short feedback cycles to validate our results, which aligned with the bi-weekly meetings with GeoNovum.
 
-### Completed features
+### Results
 
-Both viewers are delivered on a publicly accessible URL, which will be available for demonstration purposes until 31-10-2025.
+We've implemented the requested features in a dashboard application and web viewer. Both are accessible on a publicly accessible URL, which will be available for demonstration purposes until 31-10-2025.
 
 - Dashboard application (Grafana): https://sensordata-dashboard.mindloops.io/
 - Web viewer: https://sensordata-viewer.mindloops.io/
@@ -46,24 +46,22 @@ See the README in each repository for details. All source code is provided as op
 - Dashboard application (Grafana): https://github.com/mindloops/sensordata-dashboard
 - Web viewer: https://github.com/mindloops/sensordata-web-ui
 
-#### Demo
-
-##### Dashboard application (Grafana)
+#### Demo of Dashboard application
 1. Selecting a specific sensor
 ![](images/grafana-1.png)
 2. Select an area on the map and list sensor data.
 ![](images/grafana-3.png)
-3. Show measurements of sensor
+3. Show measurements of one or more sensors
 ![](images/grafana-2.png)
 4. Switch API source to use. Note: for the RIVM API the 'Use EWKT workaround' should be set on 'SRID=4326', while for the Fraunhofer API it should be empty.
 ![](images/grafana-0.png)
 
-##### Web viewer
+#### Demo of Web viewer
 1. Selecting a specific sensor
 ![](images/viewer-1.png)
 2. Select an area on the map and list sensor data.
 ![](images/viewer-3.png)
-3. Show measurements of sensor
+3. Show measurements of one or more sensors
 ![](images/viewer-2.png)
 
 ### Findings
