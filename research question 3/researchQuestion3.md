@@ -88,5 +88,51 @@ OpenCitySense consists of:
 - A connector for connecting LoRaWAN devices over Chirpstack.
 - A connector for connecting LoRaWAN devices over TTN/TTI.
 
+
+#### Data Model
+
+To allow the representation of device management information, a data model extension has been designed for the data models of the SensorThings API and the tasking extension.
+The extended data mode is depicted in the following image.
+
+![OpenCitySense Archtiecture](Datamodel-OpenCitySense.drawio.png)
+
+
+Connectors and Devices are modelled as Things.
+To make it easier to distinguish between different types of Things, a "type" field has been added to the Thing entity type that indicates the type of the thing.
+Things of type "Connector" are linked to the Things of the devices they manage, through the ControlledDevices <-> ControllingConnector relation.
+This makes it easy to find all the devices controlled by a certain connector, and to find the connector controlling a certain device.
+
+Each Thing can have a DeviceModel, describing the capabilities of the Device or Connector.
+A DeviceModel contains the schema for the Configurations of devices of this model, and can link to a Configuration that is the template or default configuration of devices of this model.
+DeviceModels can link to a Decoder that can be used to decode and encode data coming from and sent to devices of this model.
+
+
+DeviceModels link to Sensors that describe the Sensors that a device of the model has.
+In turn, Sensors link to the ObservedProperties that a Sensor of this type observes.
+Using these two links, a Connector knows which Datastreams to create and which Sensor and ObservedProperty to link, when onboarding a Device.
+
+
+DeviceModels link to the DeviceModels of the Connectors that they are compatible with.
+This allows a user interface to find the DeviceModels that work on a chosen Connector, and allows the Connector to specify additional configuration options it requires on a Device and a DeviceModel.
+
+
+Configurations describe how a device can be, was or is configured.
+The schema for the config is stored in the DeviceModel of the device.
+The status field of a configuration indicates the current status of a sensor (Created, Active, Inactive, Removed) or if the Configuration is a Template.
+Configurations have a time field that indicates when this configuration became active.
+If a device has multiple configurations there must be only one configuration with status "Active".
+The other configurations are historical Configurations or templates.
+
+
+To allow the secure storage of passwords or API keys, the DeviceSecret class was added to the data model.
+The secrets can be secured, both by only giving certain users read-access to these device secrets, and by encrypting the values of the device secrets.
+To allow Encryption, a connector has a public/private key pair.
+The private key of a connector is not stored in the SensorThings data model, but directly passed to the connector, usually using an environment variable.
+The public key of the connector is available in the SensorThings data model and can be used by clients to encrypt passwords before storing them in a DeviceSecret entity.
+This way only the connector can decrypt these secrets.
+
+
+#### Future
+
 OpenCitySense is a currently running internal research project of Fraunhofer IOSB, with the first demonstrators operational.
 
