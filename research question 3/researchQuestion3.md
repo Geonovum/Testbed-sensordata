@@ -38,10 +38,7 @@ A common piece of software used for this purpose is [NodeRed](https://nodered.or
 
 One problem with this architecture is directly clear from figure 1: The data from a single sensor has to be managed and kept synchronised over multiple systems.
 
-<figure id="Generic-IoT-Architecture" >
-![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png)
-<figcaption>Generic IoI Architecture with many different Admin interfaces (https://doi.org/10.5194/isprs-archives-XLVIII-4-2024-197-2024)</figcaption>
-</figure>
+![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png "Generic IoI Architecture with many different Admin interfaces, https://doi.org/10.5194/isprs-archives-XLVIII-4-2024-197-2024")
 
 
 Taking a typical LoRa device, using NodeRed as ETL stack, the process looks something like this:
@@ -76,10 +73,7 @@ The standard [tasking extension](https://docs.ogc.org/is/17-079r1/17-079r1.html)
 The connector concept can then be extended to not just be a one-way ETL process, but to take an active role in the sensor registration process on the LoRaWAN stack.
 It can receive information about new or updated sensors from the SensorThings service, and automatically take all required registration actions in the communication infrastructure.
 
-<figure id="OpenCitySense-Architecture" >
-![OpenCitySense Archtiecture](media/OpenCitySense-Architecture-components-simplified.drawio.png)
-<figcaption>OpenCitySense Archtiecture</figcaption>
-</figure>
+![OpenCitySense Archtiecture](media/OpenCitySense-Architecture-components-simplified.drawio.png "OpenCitySense Archtiecture")
 
 Besides greatly simplifying the architecture, a second major advantage to using the SensorThing API service for all data storage is that it offers a consistent, powerful API for managing relational data.
 This makes all data relevant for managing sensors and their data available in a unified, consistent way, and management tools or other clients do not need to implement multiple APIs.
@@ -103,10 +97,7 @@ OpenCitySense consists of:
 To allow the representation of device management information, a data model extension has been designed for the data models of the SensorThings API and the tasking extension.
 The extended data mode is depicted in the following image.
 
-<figure id="Datamodel-OpenCitySense" >
-![OpenCitySense Data Model](media/Datamodel-OpenCitySense.drawio.png)
-<figcaption>OpenCitySense Data Model</figcaption>
-</figure>
+![OpenCitySense Data Model](media/Datamodel-OpenCitySense.drawio.png "OpenCitySense Data Model")
 
 Connectors and Devices are modelled as Things.
 To make it easier to distinguish between different types of Things, a "type" field has been added to the Thing entity type that indicates the type of the thing.
