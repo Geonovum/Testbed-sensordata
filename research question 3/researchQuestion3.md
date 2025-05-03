@@ -37,7 +37,7 @@ A Connector is a piece of software with Extract, Transform, Load (ETL) functiona
 A common piece of software used for this purpose is [NodeRed](https://nodered.org/), that features a browser-based, drag-and-drop interface for creating ETL flows.
 
 One problem with this architecture is directly clear from figure 1: The data from a single sensor has to be managed and kept synchronised over multiple systems.
-![Generic IoI Architecture with many different Admin interfaces](Generic-IoT-Architecture.drawio.png)
+![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png)
 
 
 Taking a typical LoRa device, using NodeRed as ETL stack, the process looks something like this:
@@ -94,7 +94,7 @@ OpenCitySense consists of:
 To allow the representation of device management information, a data model extension has been designed for the data models of the SensorThings API and the tasking extension.
 The extended data mode is depicted in the following image.
 
-![OpenCitySense Archtiecture](Datamodel-OpenCitySense.drawio.png)
+![OpenCitySense Archtiecture](media/Datamodel-OpenCitySense.drawio.png)
 
 
 Connectors and Devices are modelled as Things.
