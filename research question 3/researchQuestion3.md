@@ -132,6 +132,69 @@ The public key of the connector is available in the SensorThings data model and 
 This way only the connector can decrypt these secrets.
 
 
+#### Onboarding Workflow
+
+
+From the point of view of the User Interface the workflow for onboarding a sensor is as follows:
+
+```mermaid
+sequenceDiagram
+  participant SensorManager as Sensor Manager
+  participant FROST as FROST-Server
+  participant Connector as LoRaWAN<br>Connector
+  Note over SensorManager,Connector: Prerequisites:<br/>Connector, API-Key, Sensor DeviceEUI, JoinEUI,<br/>AppKey, Type, Configuration
+
+  SensorManager ->> +FROST: List DeviceModels
+  FROST -->> -SensorManager: Data
+
+  SensorManager ->> +FROST: POST Thing<br/>Links to DeviceModel
+  FROST -->> -SensorManager: @id
+
+  SensorManager ->> +FROST: POST OnboardDevice Task
+  FROST ->> +Connector: POST Task(OnboardDevice, ThingID of Device)
+  FROST -->> -SensorManager: @id
+  Connector -->> Connector: Onboard Device
+  Connector -->> -FROST: Update Task: Done
+```
+
+Assuming a suitable DeviceModel already exists for the device to be onboarded, the user interface only needs to create a Thing for the device and then create a Task for the connector to onboard the device.
+Most of the work is done by the Connector, as can be seen in the workflow focusing on what the Connector does after the onboarding Task is created:
+
+```mermaid
+sequenceDiagram
+  participant SensorManager as Sensor Manager
+  participant FROST as FROST-Server
+  participant Connector as LoRaWAN<br>Connector
+  participant Platform as LoRaWAN<br>Platform
+  participant ApplicationServer as LoRaWAN<br>Application Server
+  participant NetworkServer as LoRaWAN<br>Network Server
+  participant JoinServer as LoRaWAN<br>Join Server
+  Note over SensorManager,JoinServer: Prerequisites:<br/>Connector, API-Key, Sensor DeviceEUI, JoinEUI, AppKey, Type, Configuration
+
+  SensorManager ->> SensorManager: Choose initial configuration
+  SensorManager ->> FROST: POST Task<br>(OnboardDevice, ThingID of Device)
+  FROST ->> Connector: MQTT Push:<br>New Task (new Sensor with ThingID)
+  Connector ->> +FROST: GET Thing(sensor)<br>expand=DeviceModel, Configuration
+  FROST -->> -Connector: Data
+  Connector ->> FROST: Link Thing(sensor)<br>to Thing(Connector)
+  Connector ->> FROST: Create Entities<br>Datastreams,<br/>Actuator, etc.
+  Connector ->> Platform: POST Register Sensor<br>(ApplicationID, DeviceID, DevEUI, JoinEUI,<br>JoinServerAdr, NetworkServerAdr, ApplicationServerAdr)
+  Platform -->> Connector: Response
+  Connector ->> ApplicationServer: POST Register Sensor<br>(DeviceID,DevEUI,JoinEUI)
+  ApplicationServer -->> Connector: Response
+  Connector ->> NetworkServer: POST Register Sensor<br>(DeviceID, DevEUI, JoinEUI, FrequencyID, PhyVersion, LoRaWANVersion, AppKey)
+  NetworkServer -->> Connector: Response
+  Connector ->> JoinServer: POST Register Sensor<br>(DeviceID, DevEUI, JoinEUI, AppKey, NetworkServerAdr, ApplicationServerAdr)
+  JoinServer -->> Connector: Response
+  Connector ->>+ FROST: Get DeviceModel(x)/decoder
+  FROST -->> -Connector: Data
+  Connector ->> Connector: Set Up Decoder
+  Connector ->> FROST: PATCH Sensor<br>Active, Config
+```
+
+#### Examples
+
+
 #### Future
 
 OpenCitySense is a currently running internal research project of Fraunhofer IOSB, with the first demonstrators operational.
