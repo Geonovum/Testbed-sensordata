@@ -1,5 +1,20 @@
 ## Research question 3: Device Registration
 
+### Goal
+
+The OGC SensorThings API is a very convenient API for accessing sensor data.
+But to access sensor data, the data has to be added to a service first.
+Most sensors no not _talk_ SensorThings, but some other standard, like LoRa-WAN, NB-IoT or 5G.
+What needs to happen to have a sensor be registered in a SensorThings service, and have the data from the sensor appear there too, is device registration, or onboarding.
+This research topic explores the issue of device registration.
+
+
+### About the researchers
+
+This research is done by the [Fraunhofer Institute of Optronics, System Technologies and Image Exploitation IOSB](https://www.iosb.fraunhofer.de/en.html), specifically the department [Information Management and Production Control](https://www.iosb.fraunhofer.de/en/competences/system-technology/information-management-and-production-control.html) (ILT).
+The department Information Management and Production Control develops open and secure architectures, software components and solutions for information, control and test systems in Internet of Things (IoT) application areas.
+
+
 ### State of Research
 
 Device registration, and following that, device management, is an ongoing research topic.
@@ -200,4 +215,5 @@ sequenceDiagram
 #### Future
 
 OpenCitySense is a currently running internal research project of Fraunhofer IOSB, with the first demonstrators operational.
+The architecture and data model will be open and free for use, but which parts of the software implementation will be open source has not been decided yet.
 
