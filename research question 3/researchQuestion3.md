@@ -159,7 +159,6 @@ sequenceDiagram
   participant SensorManager as Sensor Manager
   participant FROST as FROST-Server
   participant Connector as LoRaWAN<br>Connector
-  Note over SensorManager,Connector: Prerequisites:<br/>Connector, API-Key, Sensor DeviceEUI, JoinEUI,<br/>AppKey, Type, Configuration
 
   SensorManager ->> +FROST: List DeviceModels
   FROST -->> -SensorManager: Data
@@ -186,16 +185,16 @@ sequenceDiagram
   participant ApplicationServer as LoRaWAN<br>Application Server
   participant NetworkServer as LoRaWAN<br>Network Server
   participant JoinServer as LoRaWAN<br>Join Server
-  Note over SensorManager,JoinServer: Prerequisites:<br/>Connector, API-Key, Sensor DeviceEUI, JoinEUI, AppKey, Type, Configuration
 
-  SensorManager ->> SensorManager: Choose initial configuration
-  SensorManager ->> FROST: POST Task<br>(OnboardDevice, ThingID of Device)
+  SensorManager ->> FROST: POST Task<br>OnboardDevice,<br>(ThingID of Device)
   FROST ->> Connector: MQTT Push:<br>New Task (new Sensor with ThingID)
   Connector ->> +FROST: GET Thing(sensor)<br>expand=DeviceModel, Configuration
   FROST -->> -Connector: Data
   Connector ->> FROST: Link Thing(sensor)<br>to Thing(Connector)
-  Connector ->> FROST: Create Entities<br>Datastreams,<br/>Actuator, etc.
-  Connector ->> Platform: POST Register Sensor<br>(ApplicationID, DeviceID, DevEUI, JoinEUI,<br>JoinServerAdr, NetworkServerAdr, ApplicationServerAdr)
+  loop For each Sensor linked to DeviceModel
+    Connector ->> FROST: Create Datastreams
+  end
+  Connector ->> Platform: POST Register Sensor<br>(ApplicationID, DeviceID, DevEUI,<br>JoinEUI, JoinServerAdr,<br>NetworkServerAdr,<br>ApplicationServerAdr)
   Platform -->> Connector: Response
   Connector ->> ApplicationServer: POST Register Sensor<br>(DeviceID,DevEUI,JoinEUI)
   ApplicationServer -->> Connector: Response
@@ -206,10 +205,28 @@ sequenceDiagram
   Connector ->>+ FROST: Get DeviceModel(x)/decoder
   FROST -->> -Connector: Data
   Connector ->> Connector: Set Up Decoder
-  Connector ->> FROST: PATCH Sensor<br>Active, Config
+  Connector ->> FROST: PATCH Sensor(x)/Configuration<br>Active
 ```
 
-#### Examples
+
+#### Demo
+
+A demo FROST-Server running the data model extension, with a connector to The Things Network and an onboarded sensor can be found at:  
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1
+
+The Thing for the TTN-Connector, with (encrypted) DeviceSecrets and the current Configuration can be found at:  
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?$filter=name%20eq%20%27TTN%20LoRa%20Connector%27&$expand=DeviceSecrets($select=name,type,value),Configurations
+
+The Thing for the Elsys Sensor, with the Datastreams, ObservedProperties and latest Observations:  
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?$filter=name%20eq%20%27Elsys_A81758FFFE035140%27&$expand=Datastreams($select=name,description,unitOfMeasurement;$expand=ObservedProperty($select=name),Observations($select=phenomenonTime,result;$orderby=phenomenonTime%20desc;$top=1))
+
+The DeviceModel for the sensor, with Decoder, Sensors and ObservedProperties:  
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/DeviceModels?$filter=name%20eq%20%27Elsys%20ERS%202%27&$expand=Decoder,Sensors($select=id,name;$expand=ObservedProperties($select=id,name))
+
+Note that the Decoder contains two large javascript text blobs that are used by the Connector to decode the binary payload of the Device.
+
+The service is read-only.
+For a demonstration of the onboarding process, please contact us by email at frost@iosb.fraunhofer.de.
 
 
 #### Future
