@@ -214,7 +214,10 @@ sequenceDiagram
 A demo FROST-Server running the data model extension, with a connector to The Things Network and an onboarded sensor can be found at:  
 https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1
 
-The Thing for the TTN-Connector, with (encrypted) DeviceSecrets and the current Configuration can be found at: [link](https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?%24filter%3Dname%20eq%20%27TTN%20LoRa%20Connector%27%26%24expand%3DDeviceSecrets%28%24select%3Dname%2Ctype%2Cvalue%29%2CConfigurations)
+A map that can also plot the data of the sensor can be found at:  
+https://api4inspire.k8s.ilt-dmz.iosb.fraunhofer.de/servlet/is/272/
+
+The Thing for the TTN-Connector, with (encrypted) DeviceSecrets and the current Configuration can be found using the following query: [link](https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?%24filter%3Dname%20eq%20%27TTN%20LoRa%20Connector%27%26%24expand%3DDeviceSecrets%28%24select%3Dname%2Ctype%2Cvalue%29%2CConfigurations)
 
 ```
 https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?
