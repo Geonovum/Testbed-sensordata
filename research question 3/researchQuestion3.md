@@ -216,33 +216,37 @@ https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1
 
 The Thing for the TTN-Connector, with (encrypted) DeviceSecrets and the current Configuration can be found at: [link](https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?%24filter%3Dname%20eq%20%27TTN%20LoRa%20Connector%27%26%24expand%3DDeviceSecrets%28%24select%3Dname%2Ctype%2Cvalue%29%2CConfigurations)
 
-    https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?
-      $filter=name eq 'TTN LoRa Connector'&
-      $expand=DeviceSecrets($select=name,type,value),Configurations
+```
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?
+  $filter=name eq 'TTN LoRa Connector'&
+  $expand=DeviceSecrets($select=name,type,value),Configurations
+```
 
 The Thing for the Elsys Sensor, with the Datastreams, ObservedProperties and latest Observations: [link](https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?$filter=name%20eq%20%27Elsys_A81758FFFE035140%27&$expand=Datastreams%28$select=name,description,unitOfMeasurement;$expand=ObservedProperty%28$select=name%29,Observations%28$select=phenomenonTime,result;$orderby=phenomenonTime%20desc;$top=1%29%29)
 
-    https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?
-      $filter=name eq 'Elsys_A81758FFFE035140'&
-      $expand=Datastreams(
-        $select=name,description,unitOfMeasurement;
-        $expand=
-          ObservedProperty($select=name),
-          Observations(
-            $select=phenomenonTime,result;
-            $orderby=phenomenonTime desc;$top=1))
-
-
+```
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/Things?
+  $filter=name eq 'Elsys_A81758FFFE035140'&
+  $expand=Datastreams(
+    $select=name,description,unitOfMeasurement;
+    $expand=
+      ObservedProperty($select=name),
+      Observations(
+        $select=phenomenonTime,result;
+        $orderby=phenomenonTime desc;$top=1))
+```
 
 The DeviceModel for the sensor, with Decoder, Sensors and ObservedProperties: [link](https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/DeviceModels?$filter=name%20eq%20%27Elsys%20ERS%202%27&$expand=Decoder,Sensors%28$select=id,name;$expand=ObservedProperties%28$select=id,name%29%29)
 
-    https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/DeviceModels?
-      $filter=name eq 'Elsys ERS 2'&
-      $expand=
-        Decoder,
-        Sensors(
-          $select=id,name;
-          $expand=ObservedProperties($select=id,name))
+```
+https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/DeviceModels?
+  $filter=name eq 'Elsys ERS 2'&
+  $expand=
+    Decoder,
+    Sensors(
+      $select=id,name;
+      $expand=ObservedProperties($select=id,name))
+```
 
 Note that the Decoder contains two large javascript text blobs that are used by the Connector to decode the binary payload of the Device.
 
