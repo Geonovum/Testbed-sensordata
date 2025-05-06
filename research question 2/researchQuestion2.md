@@ -1,4 +1,4 @@
-## Research question 2: Visualisation & analysis
+## Research question 2: Visualisation & Analysis
 
 ### Goal
 
@@ -29,7 +29,7 @@ This research is conducted by [Mindloops BV](https://mindloops.nl). Mindloops is
 
 The viewers communicate with a SensorThings API and allow users to select sensors and view measurements. As a data source we used the [RIVM SamenMeten SensorThings API](https://www.samenmeten.nl/international/API). To prove that our viewer is able to handle SensorThings API in a generic way we’ve also added the [Fraunhofer Airquality SensorThings API](https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/) (as a bonus).
 
-![](images/architecture.png)
+![](media/rq2/architecture.png)
 
 We’ve applied a risk-driven approach in which we tackled the most complex things early on. This maximises the desired outcome within the available time. Also we used an iterative and agile approach with short feedback cycles to validate our results, which aligned with the bi-weekly meetings with GeoNovum.
 
@@ -48,21 +48,21 @@ See the README in each repository for details. All source code is provided as op
 
 #### Demo of Dashboard application
 1. Selecting a specific sensor
-![](images/grafana-1.png)
+![](media/rq2/grafana-1.png)
 2. Select an area on the map and list sensor data.
-![](images/grafana-3.png)
+![](media/rq2/grafana-3.png)
 3. Show measurements of one or more sensors
-![](images/grafana-2.png)
+![](media/rq2/grafana-2.png)
 4. Switch API source to use. Note: for the RIVM API the 'Use EWKT workaround' should be set on 'SRID=4326', while for the Fraunhofer API it should be empty.
-![](images/grafana-0.png)
+![](media/rq2/grafana-0.png)
 
 #### Demo of Web viewer
 1. Selecting a specific sensor
-![](images/viewer-1.png)
+![](media/rq2/viewer-1.png)
 2. Select an area on the map and list sensor data.
-![](images/viewer-3.png)
+![](media/rq2/viewer-3.png)
 3. Show measurements of one or more sensors
-![](images/viewer-2.png)
+![](media/rq2/viewer-2.png)
 
 ### Findings
 
