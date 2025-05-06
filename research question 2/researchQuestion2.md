@@ -40,8 +40,8 @@ We've implemented the requested features in a dashboard application and web view
 - Dashboard application (Grafana): https://sensordata-dashboard.mindloops.io/
 - Web viewer: https://sensordata-viewer.mindloops.io/
 
-All source code needed to run both solutions in a local environment is delivered as open source. 
-See the README in each repository for details. All source code is provided as open source under MIT license.
+All source code needed to run both solutions in a local environment is delivered as open source under MIT license. 
+See the README in each repository for details.
 
 - Dashboard application (Grafana): https://github.com/mindloops/sensordata-dashboard
 - Web viewer: https://github.com/mindloops/sensordata-web-ui
@@ -114,7 +114,7 @@ A bespoke web app allows for more freedom in customization and presenting the da
 
 Our research revealed the following findings:
 
-1. On request of GeoNovum we used AI code generation tools to help assist with the generation of several parts of the viewer. The AI tools we used (Amazon, Microsoft, Google) all understood SensorThings API semantics in general and were able to provide initial implementations for them. It did require significant tuning, due to API implementation details sometimes missing or behaving differently, and AI tools not always properly providing solutions that had the right semantics. In summary, at the moment AI tools are useful for jumpstarting specific parts of the viewer, such as a table or map component, but are unlikely to provide meaningful results when tasked with creating an entire viewer from a single prompt. Still AI coding tools are very helpful and promising.
+1. On request of GeoNovum we used AI code generation tools to help assist with the generation of several parts of the viewer. The AI tools we used (Anthropic, OpenAI, Google) all understood SensorThings API semantics in general and were able to provide initial implementations for them. It did require significant tuning, due to API implementation details sometimes missing or behaving differently, and AI tools not always properly providing solutions that had the right semantics. In summary, at the moment AI tools are useful for jumpstarting specific parts of the viewer, such as a table or map component, but are unlikely to provide meaningful results when tasked with creating an entire viewer from a single prompt. Still AI coding tools are very helpful and promising.
 
 2. As mentioned in the RIVM paragraph due to the CORS limitation in RIVM API, we couldn’t connect the web viewer directly to the RIVM API. Instead, we used
 an intermediate proxy on our own backend to work around this limitation.
