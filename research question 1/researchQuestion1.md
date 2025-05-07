@@ -49,8 +49,7 @@ Items that are explicitly excluded from the comparison are:
 
 ### Datamodel
 
-![STA datamodel](/media/STAdatamodel.png)
-![CS API datamodel](/media/CSAPIdatamodel.png)
+![Datamodel Comparison](./media/DatamodelComparison.png "Datamodels of STA and CS API.")
 
 Similarities relevant to this research topic:
 - Measured results are stored as Observations with Datastreams as their main grouping mechanism.
@@ -68,8 +67,9 @@ Relevant similarities:
 -  Support for limiting the list of returned properties per object with the `select` option. This is useful to reduce the size of the response, especially for use cases in e.g dashboards.
 
 Relevant differences:
-- CS API by default returns all related entities of a requested object. STA only covers properties of the selected entity, but has options to deviate from this with `expand` to extend with related entities.
+- CS API by default returns all related entities of a requested object. STA only covers properties of the selected entity, but has options to extend on that with `expand` to add related entities.
 - STA supports more forms of nested filtering. This reduces the number of queries that need to be done to find the right collection of results.
+- STA is based on OData 4.0, a protocol for requesting entities. This may be a complicating factor when it comes to applying STA to an extisting application, compared to CS API, which is based on OGC API Common and API Features.
 
 ## [WIP] Results from PoC
 
@@ -77,24 +77,55 @@ Relevant differences:
 
 ```mermaid
 graph LR;
-    Chirpstack --> STA;
-    STA --> Lizard;
+    Chirpstack --> OGC API;
+    OGC API --> Lizard;
 ```
 <figcaption>PoC Dataflow based on SensorThings API</figcaption>
 </figure>
 
 #### Step 1: Receiving Chirpstack data
-In Chirpstack an HTTP-feed can be set up, sending messages from a group of sensors to an external URL. We've set up a service that receives this feed and processes the input as log messages.
+In Chirpstack an HTTP-feed has been set up, sending messages from a group of sensors to an external URL. We've set up a service that receives this feed and processes the input as log messages.
 
 #### Step 2: Setting up FROST-server with initial configuration
+We've installed the FROST-server in our staging environment. This worked pretty much out-of-the-box. Mostly, some settings needed to be changed to adjust authentication and authorisation.
 
-#### Step 4: Processing sensor observations in STA
-The Chirpstack feed consists of JSON with a couple of relevant attributes that we needed to process the Observations to 
-![Chirpstack mapping](/media/ChirpstackMapping.png)
+![FROST-server POST](./media/FROSTserverPOST.png "Example of a POST request in the FROST-server interface.")
 
-#### Step 5: Configuring Lizard
+With the service running we could use the API to configure all required entities to process the Chripstack feed. The following entities needed to be configured:
 
-#### Step 6: Processing observations from STA to Lizard
+- Sensors (with name that corresponds to the device name in Chirpstack)
+- Locations
+- Things
+- ObservedProperties (with name that corresponds to observation in Chirpstack)
+- Datastreams
+
+We chose not to configure FeaturesOfInterest, because STA generates and reuses those automatically based on the Thing related to the Datastream an Observation is POSTed to.
+
+#### Step 3: Processing sensor observations in STA
+The Chirpstack feed consists of JSON with a couple of relevant attributes that we need to process the Observations. The table shows an overview of the typical message content in the JSON. 
+
+![Chirpstack mapping](./media/ChirpstackMapping.png "Mapping of Chirpstack message attributes to STA entity properties.")
+
+For each incoming message we check whether it contains observations. If so, we try to find the Datastream based on the Sensor and the ObservedProperty. If it is found, the Observations are POSTed to that Datastream.
+
+#### Step 4: Configuring Lizard
+The datamodel of Lizard has a similar datamodel for Datastreams
+<figure id="Lizard Datamodel">
+
+```mermaid
+erDiagram;
+    direction LR;
+    Asset |o--o{ Location;
+    Location ||--o{ Timeseries;
+    Observation_type ||--o{ Timeseries;
+    Timeseries ||--o{ Events;
+```
+<figcaption>Lizard Datamodel for Timeseries.</figcaption>
+</figure>
+
+For the mapping to Lizard we initially used the FeatureOfInterest as 
+
+#### Step 5: Processing observations from STA to Lizard
 
 ### [WIP] Learnings from PoC
 
