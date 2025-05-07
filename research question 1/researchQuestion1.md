@@ -71,7 +71,7 @@ Relevant differences:
 - STA supports more forms of nested filtering. This reduces the number of queries that need to be done to find the right collection of results.
 - STA is based on OData 4.0, a protocol for requesting entities. This may be a complicating factor when it comes to applying STA to an extisting application, compared to CS API, which is based on OGC API Common and API Features.
 
-## [WIP] Results from PoC
+## Proof of Concept
 
 <figure id="PoC Dataflow">
 
@@ -114,19 +114,28 @@ The datamodel of Lizard has a similar datamodel for Datastreams
 ```mermaid
 erDiagram
     direction LR
-    Asset |o--o{ Location: contains
-    Location ||--o{ Timeseries: contains
-    Observation_type ||--o{ Timeseries: defines
-    Timeseries ||--o{ Events: has
+    Asset |o--o{ Location: ""
+    Location ||--o{ Timeseries: ""
+    Observation_type ||--o{ Timeseries: ""
+    Timeseries ||--o{ Events: ""
 ```
 <figcaption>Lizard Datamodel for Timeseries.</figcaption>
 </figure>
 
-For the mapping to Lizard we initially used the FeatureOfInterest as 
+For the mapping to Lizard we initially used the FeatureOfInterest in combination with ObservedProperty to map Datastreams to Lizard Timeseries. This turned out to be unpractical, due to the position of FoI in the STA datamodel. As it is only related to Observations it becomes harder to find the related Datastreams. Instead, we decided to use the Thing as point of entry for the mapping. This means that Lizard location codes where changed from `test_location#` (FoI name is taken from the Location) to `test_thing#`, so that the mapping could be switched to STA Things.
+
+Observation_types were registered corresponding to STA ObservedProperties and for each Datastream a Timeseries is created. The last step is the creation of assets (i.e. groundwaterstations and measuringstations, depending on the type of measurements in Chirpstack). Assets are not required for the processing of Observations, but they serve as a represenation of locations on the map in the [Lizard Viewer](https://nxt3.staging.lizard.net/viewer/favourites/86542561-3feb-4035-aa39-299bfc80a693).
 
 #### Step 5: Processing observations from STA to Lizard
+Based on the configuration in STA and Lizard and the mapping of Datastreams to Timeseries the Observations are retrieved from STA and POSTed to Lizard REST API. The sequence of requests to STA that are done to find the right Datastream and collect the Observations are:
 
-### [WIP] Learnings from PoC
+1. Find the Thing corresponding to the Lizard location: `/Things?$filter=name eq {liz_loc_code}`
+1. Find the ObservedProperty corresponding to the Timeseries observation_type: `/ObservedProperties?$filter=name eq {liz_ts_obstype}`
+1. Find the Datastream corresponding to the Timeseries: `/Datastreams?$filter=ObservedProperty/id eq {ObservedProperty_id} and Thing/id eq {Thing_id}`
+1. Retrieve all new Observations for that Datastream: `/Observations?$filter=Datastream/id eq Datastream_id and phenomenonTime gt {liz_ts_end}`
+
+### Learnings from PoC and comparison with CS API
+
 
 ## Conclusions
 On implementability of the API standards:
