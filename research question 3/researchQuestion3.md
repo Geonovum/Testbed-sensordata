@@ -53,7 +53,7 @@ A common piece of software used for this purpose is [NodeRed](https://nodered.or
 
 One problem with this architecture is directly clear from figure 1: The data from a single sensor has to be managed and kept synchronised over multiple systems.
 
-![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png "Generic IoI Architecture with many different Admin interfaces")
+![Generic IoT Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png "Generic IoT Architecture with many different Admin interfaces")
 
 
 Taking a typical LoRa device, using NodeRed as ETL stack, the process looks something like this:
@@ -88,7 +88,7 @@ The standard [tasking extension](https://docs.ogc.org/is/17-079r1/17-079r1.html)
 The connector concept can then be extended to not just be a one-way ETL process, but to take an active role in the sensor registration process on the LoRaWAN stack.
 It can receive information about new or updated sensors from the SensorThings service, and automatically take all required registration actions in the communication infrastructure.
 
-![OpenCitySense Archtiecture](media/OpenCitySense-Architecture-components-simplified.drawio.png "OpenCitySense Archtiecture")
+![OpenCitySense Architecture](media/OpenCitySense-Architecture-components-simplified.drawio.png "OpenCitySense Archtiecture")
 
 Besides greatly simplifying the architecture, a second major advantage to using the SensorThing API service for all data storage is that it offers a consistent, powerful API for managing relational data.
 This makes all data relevant for managing sensors and their data available in a unified, consistent way, and management tools or other clients do not need to implement multiple APIs.
