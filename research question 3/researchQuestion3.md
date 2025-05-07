@@ -252,8 +252,25 @@ https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/FROST-OpenCitySense/v1.1/DeviceM
 ```
 
 Note that the Decoder contains two large javascript text blobs that are used by the Connector to decode the binary payload of the Device.
+The device sends this payload Base64 encoded, for example `AQDVAi8EAAEFAAYB6AcOHw==`.
+This is first decoded to a JSON object, by the decoder provided by the manufacturer:
 
-The service is read-only.
+```JSON
+{
+  "temperature":21.3,
+  "humidity":47,
+  "light":1,
+  "motion":0,
+  "co2":488,
+  "vdd":3615
+}
+```
+
+From the data in this JSON object Observations are generated, using the time in the LoRa message as phenomenonTime.
+Because the names used in this JSON object are alse vendor specific, a second mapper is used to find the correct Datastream for each element.
+These Observations are then added to the corresponding Datastream of the device.
+
+The demo service is read-only.
 For a demonstration of the onboarding process, please contact us by email at frost@iosb.fraunhofer.de.
 
 
