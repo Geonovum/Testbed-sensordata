@@ -77,8 +77,7 @@ Relevant differences:
 
 ```mermaid
 graph LR;
-    Chirpstack --> OGC API;
-    OGC API --> Lizard;
+    Chirpstack --map1--> STA --map2--> Lizard;
 ```
 <figcaption>PoC Dataflow based on SensorThings API</figcaption>
 </figure>
@@ -113,12 +112,12 @@ The datamodel of Lizard has a similar datamodel for Datastreams
 <figure id="Lizard Datamodel">
 
 ```mermaid
-erDiagram;
-    direction LR;
-    Asset |o--o{ Location;
-    Location ||--o{ Timeseries;
-    Observation_type ||--o{ Timeseries;
-    Timeseries ||--o{ Events;
+erDiagram
+    direction LR
+    Asset |o--o{ Location: contains
+    Location ||--o{ Timeseries: contains
+    Observation_type ||--o{ Timeseries: defines
+    Timeseries ||--o{ Events: has
 ```
 <figcaption>Lizard Datamodel for Timeseries.</figcaption>
 </figure>
