@@ -53,7 +53,7 @@ A common piece of software used for this purpose is [NodeRed](https://nodered.or
 
 One problem with this architecture is directly clear from figure 1: The data from a single sensor has to be managed and kept synchronised over multiple systems.
 
-![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png "Generic IoI Architecture with many different Admin interfaces, https://doi.org/10.5194/isprs-archives-XLVIII-4-2024-197-2024")
+![Generic IoI Architecture with many different Admin interfaces](media/Generic-IoT-Architecture.drawio.png "Generic IoI Architecture with many different Admin interfaces")
 
 
 Taking a typical LoRa device, using NodeRed as ETL stack, the process looks something like this:
