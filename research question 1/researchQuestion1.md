@@ -33,7 +33,7 @@ Next, we set up a proof of concept application that makes use of the data made a
 - How API outputs can be shaped to the desired output for different use cases
 - What mapping is needed to supply data from the API standard to another data platform
 
-Unfortunately, we didn't succeed in installing the CS API, because there were technical issues with the available docker images of the 52North package. For the functional comparison with STA we used an existing implementation based on [OGC CS API Docs](https://opengeospatial.github.io/ogcapi-connected-systems/redoc/?url=../api/part2/openapi/openapi-connectedsystems-2.yaml#tag/Observations), which refers to the
+Unfortunately, we didn't succeed in installing the CS API, because there were technical issues (reported [here](https://github.com/52North/connected-systems-pygeoapi/issues/7)) with the available docker images of the 52North package. For the functional comparison with STA we used an existing implementation based on [OGC CS API Docs](https://opengeospatial.github.io/ogcapi-connected-systems/redoc/?url=../api/part2/openapi/openapi-connectedsystems-2.yaml#tag/Observations), which refers to the
 [GeoRobotix OGC testbed 18 CS API](https://api.georobotix.io/ogc/t18/api).
 
 ## Comparison of OGC API standards
@@ -65,6 +65,7 @@ The two standards are both based on REST, but have different capabilities when i
 
 Relevant similarities:
 -  Support for limiting the list of returned properties per object with the `select` option. This is useful to reduce the size of the response, especially for use cases in e.g dashboards.
+- Both standards do not have built-in aggregation options, which can have a lot of added value when it comes to using data in other applications.
 
 Relevant differences:
 - CS API by default returns all related entities of a requested object. STA only covers properties of the selected entity, but has options to extend on that with `expand` to add related entities.
@@ -86,7 +87,7 @@ graph LR;
 In Chirpstack an HTTP-feed has been set up, sending messages from a group of sensors to an external URL. We've set up a service that receives this feed and processes the input as log messages.
 
 #### Step 2: Setting up FROST-server with initial configuration
-We've installed the FROST-server in our staging environment. This worked pretty much out-of-the-box. Mostly, some settings needed to be changed to adjust authentication and authorisation.
+We've installed the FROST-server in our staging environment. This worked pretty much out-of-the-box. Mostly, some settings needed to be changed to adjust authentication and authorisation (see `docker-compose.yml`).
 
 ![FROST-server POST](./media/FROSTserverPOST.png "Example of a POST request in the FROST-server interface.")
 
@@ -135,17 +136,33 @@ Based on the configuration in STA and Lizard and the mapping of Datastreams to T
 1. Retrieve all new Observations for that Datastream: `/Observations?$filter=Datastream/id eq Datastream_id and phenomenonTime gt {liz_ts_end}`
 
 ### Learnings from PoC and comparison with CS API
+We were successful in mapping data through the system the way we intended to do. STA has sufficient filter options to get the desired Observations from the API for data supply to another application. Because of the different entity relations it is important to choose the right "perspective" from which you do the mapping.
 
+Translating this workflow the CS API, based on available documentation, we foresee no issues implementing CS API in the same fashion. Mapping from Chirpstack to CS API would be based on System and ObservedProperty. For the mapping to Lizard we could in this case use the FeatureOfInterest, as in CS API it is linked to the Datastream, again in combination with the ObservedProperty.
+
+## Potential of API extensions for working with collections of Observations
+There are two possible extensions that support grouping of Observations to improve the accessibility to similar Observations. This is relevant for the use of these API's in the support of applications like dashboards or digital twins, where you often want to know the state of a collection of objects at a certain time. The original setups of the API standards lack specialized filter or aggregation options to retrieve a single value in time per object, given that in most cases Observations are not neatly lined up in time.
+
+STA PLUS has an ObservationGroup entity which can contain "a bag of Observation and/or relations". This extension is scoped on citizen science and focusses on the division of data under licenses and mechanisms to share data. In practice it is for example used to relate samples of water quality done in the same water body. It is not modeled and optimized to support more generic applications.
+
+The ObservationCollection in the Observations, Measurements and Sampling (OMS) model does have a generic scope and therefore a little less overhead in attribution.
+
+The suitability of these grouping mechanisms for our purpose seems questionable. One would have to maintain a registration of collections per relevant timestep that might be used by e.g. a dashboard. This will take a huge administrative workload to keep up to date. It makes much more sense to put an effort in aligning Observations in time, so they can be retrieved using basic filter options. 
 
 ## Conclusions
 On implementability of the API standards:
 - The API standards are applicable in the Dutch domain, at least as stand-alone applications. Data can be exchanged between these standards and other applications.
-- Suitability depends on the purpose of an application. If it relies on information about the sensors/systems, e.g. for validation of Observations, it makes sense to use them. If not, these standards come with quite some overhead in entity relationships.
+- Suitability depends on the purpose of an application. If it relies on information about the sensors/systems, e.g. for validation of Observations, it makes sense to use them. If not, these standards come with quite some overhead in entity relationships and configuration.
 - Due to overhead in the datamodels there is a risk of scalability issues for larger data systems. There is a limit to what can be solved by clever indexes, buckets and partitioning of Observations, their different possible types of results and entity relations.
-- Full support of these standards by existing data warehouse applications may be tricky due to a mismatch in mapping of entities between datamodels. It would probably require specific boundary conditions for how data is stored and metadata is configured to make either API standard applicable for both data ingestion and publication.
+- Full support of these standards by existing data warehouse applications will be tricky due to a mismatch in mapping of entities between datamodels. It would probably require specific boundary conditions for how data is stored and metadata is configured to make either API standard applicable for both data ingestion and publication. STA has some additional disadvantages because of the use of OData.
 
 On communication with a collection of sensors:
-- STA supports query options to expand API responses with information of related entities. This can be used for dashboarding applications to retrieve results for multiple objects.
+- STA supports query options to expand API responses with information of related entities and both have a `select` option to limt the response size. This can be used for dashboarding applications to retrieve results for multiple objects.
 - The accuracy of temporal queries on Observations depends on the measurement regime of a collection of sensors and the way properties like phenomenonTime and resultTime are stored. If not lined up neatly on rounded times and intervals, there is a big risk of returning multiple results per Datastream, which may be hard to deal with by the retrieving application.
 - Based on documentation, CS API has one advantage over STA when it comes to querying Observations for collections of Datastreams: The filter option `latest` on phenomenonTime and resultTime. Unfortunately, in the implementation that we tested with this did only work when requesting Observations for a single Datastream, which makes it irrelevant for dashboarding.
 - A mechanism like ObservationCollections makes querying groups of Observations much easier. Disadvantage is that it requires a lot of additional administration, to group Observations like that and to keep Collections up to date in time. For operational services this will likely give a lot of overhead.
+
+## Discussion
+We've discussed the outcomes of our research with specialist Hylke van der Schaaf from research topic 3. He had a couple of interesting comments:
+- In version 2 of STA FeaturesOfInterest can be related to Datastreams directly, overcoming the difficulties we had mapping the Observations based on that perspective in comparison with CS API.
+- FROST-server logs queries that take longer than a certain treshold. This information can be used to improve database indexes and other data optimizations. Of course, the larger the storage size and the wider the use of an implementation it will become harder and harder to fine solutions for potential performance issues. He has good experiences with implementations that contain up to 850 million Observations.
