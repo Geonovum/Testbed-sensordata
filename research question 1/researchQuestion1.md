@@ -109,7 +109,8 @@ The Chirpstack feed consists of JSON with a couple of relevant attributes that w
 For each incoming message we check whether it contains observations. If so, we try to find the Datastream based on the Sensor and the ObservedProperty. If it is found, the Observations are POSTed to that Datastream.
 
 #### Step 4: Configuring Lizard
-The datamodel of Lizard has a similar datamodel for Datastreams
+The datamodel of Lizard for timeseries has quite some similarities to that of Datastreams. The main difference is a lack of differentiation between Sensor/System, Thing and FoI. This is "flattened" to a Location, optionally linked to an Asset.
+
 <figure id="Lizard Datamodel">
 
 ```mermaid
@@ -122,7 +123,7 @@ erDiagram
 ```
 <figcaption>Lizard Datamodel for Timeseries.</figcaption>
 </figure>
-
+ 
 For the mapping to Lizard we initially used the FeatureOfInterest in combination with ObservedProperty to map Datastreams to Lizard Timeseries. This turned out to be unpractical, due to the position of FoI in the STA datamodel. As it is only related to Observations it becomes harder to find the related Datastreams. Instead, we decided to use the Thing as point of entry for the mapping. This means that Lizard location codes where changed from `test_location#` (FoI name is taken from the Location) to `test_thing#`, so that the mapping could be switched to STA Things.
 
 Observation_types were registered corresponding to STA ObservedProperties and for each Datastream a Timeseries is created. The last step is the creation of assets (i.e. groundwaterstations and measuringstations, depending on the type of measurements in Chirpstack). Assets are not required for the processing of Observations, but they serve as a represenation of locations on the map in the [Lizard Viewer](https://nxt3.staging.lizard.net/viewer/favourites/86542561-3feb-4035-aa39-299bfc80a693).
@@ -154,7 +155,7 @@ On implementability of the API standards:
 - The API standards are applicable in the Dutch domain, at least as stand-alone applications. Data can be exchanged between these standards and other applications.
 - Suitability depends on the purpose of an application. If it relies on information about the sensors/systems, e.g. for validation of Observations, it makes sense to use them. If not, these standards come with quite some overhead in entity relationships and configuration.
 - Due to overhead in the datamodels there is a risk of scalability issues for larger data systems. There is a limit to what can be solved by clever indexes, buckets and partitioning of Observations, their different possible types of results and entity relations.
-- Full support of these standards by existing data warehouse applications will be tricky due to a mismatch in mapping of entities between datamodels. It would probably require specific boundary conditions for how data is stored and metadata is configured to make either API standard applicable for both data ingestion and publication. STA has some additional disadvantages because of the use of OData.
+- Full support of these standards by existing data warehouse applications like Lizard, e.g. Delft-FEWS and HydroNET, will be tricky due to a mismatch in mapping of entities between datamodels. It would probably require specific boundary conditions for how data is stored and metadata is configured to make either API standard applicable for both data ingestion and publication. STA has some additional disadvantages because of the use of OData.
 
 On communication with a collection of sensors:
 - STA supports query options to expand API responses with information of related entities and both have a `select` option to limt the response size. This can be used for dashboarding applications to retrieve results for multiple objects.
