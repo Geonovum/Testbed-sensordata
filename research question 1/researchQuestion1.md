@@ -33,7 +33,7 @@ Next, we set up a proof of concept application that makes use of the data made a
 - How API outputs can be shaped to the desired output for different use cases
 - What mapping is needed to supply data from the API standard to another data platform
 
-Unfortunately, we didn't succeed in installing the CS API, because there were technical issues (reported [here](https://github.com/52North/connected-systems-pygeoapi/issues/7)) with the available docker images of the 52North package. For the functional comparison with STA we used an existing implementation based on [OGC CS API Docs](https://opengeospatial.github.io/ogcapi-connected-systems/redoc/?url=../api/part2/openapi/openapi-connectedsystems-2.yaml#tag/Observations), which refers to the
+Unfortunately, we didn't succeed in installing the CS API, because there were technical issues with the available docker images of the 52North package (reported [here](https://github.com/52North/connected-systems-pygeoapi/issues/7)). For the functional comparison with STA we used an existing implementation based on [OGC CS API Docs](https://opengeospatial.github.io/ogcapi-connected-systems/redoc/?url=../api/part2/openapi/openapi-connectedsystems-2.yaml#tag/Observations), which refers to the
 [GeoRobotix OGC testbed 18 CS API](https://api.georobotix.io/ogc/t18/api).
 
 ## Comparison of OGC API standards
@@ -64,8 +64,8 @@ Differences relevant to this research topic:
 The two standards are both based on REST, but have different capabilities when it comes to querying data and shaping responses. Our focus is on Observations, as those are most relevant to use in applications.
 
 Relevant similarities:
--  Support for limiting the list of returned properties per object with the `select` option. This is useful to reduce the size of the response, especially for use cases in e.g dashboards.
-- Both standards do not have built-in aggregation options, which can have a lot of added value when it comes to using data in other applications.
+- Support for limiting the list of returned properties per object with the `select` option. This is useful to reduce the size of the response, especially for use cases in e.g dashboards.
+- Neither standard has built-in aggregation options, which can have a lot of added value when it comes to using data in other applications.
 
 Relevant differences:
 - CS API by default returns all related entities of a requested object. STA only covers properties of the selected entity, but has options to extend on that with `expand` to add related entities.
@@ -167,3 +167,8 @@ On communication with a collection of sensors:
 We've discussed the outcomes of our research with specialist Hylke van der Schaaf from research topic 3. He had a couple of interesting comments:
 - In version 2 of STA FeaturesOfInterest can be related to Datastreams directly, overcoming the difficulties we had mapping the Observations based on that perspective in comparison with CS API.
 - FROST-server logs queries that take longer than a certain treshold. This information can be used to improve database indexes and other data optimizations. Of course, the larger the storage size and the wider the use of an implementation it will become harder and harder to fine solutions for potential performance issues. He has good experiences with implementations that contain up to 850 million Observations.
+
+## Recommendations
+For future research on the applicability of these and similar standards we have the following recommendations:
+- Does the potential applicability reach further than stand-alone systems? To what extent could existing applications adopt these standards, e.g. when it comes to data exchange through underlying standards?
+- What role could temporal aggregation of observations play? This is something that is missing in these standards but is widely used in the field of timeseries data.
