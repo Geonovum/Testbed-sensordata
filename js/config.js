@@ -4,7 +4,7 @@ let respecConfig = {
   // title is verplicht! Neem hier de titel van het document op ----------------------
   title: "Testbed sensordata report",
   //-- specStatus is verplicht! (activeer 1 van de volgende) --------------------------
-  specStatus: "wv",                   // Werkversie
+  specStatus: "vv",                   // Werkversie
   //specStatus: "cv",               // Consultatieversie
   //specStatus: "vv",               // Versie ter vaststelling
   //specStatus: "def",              // Vastgestelde versie
@@ -56,10 +56,26 @@ let respecConfig = {
   authors:
     [
       {
-        name: "voornaam achternaam",
+        name: "Frank Terpstra",
         company: "Geonovum",
         companyURL: "https://www.geonovum.nl",
+      },
+	  {
+        name: "Lex van Dolderen",
+        company: "Nelen & Schuurmans",
+        companyURL: "https://www.nelen-schuurmans.nl",
+      },
+	  {
+        name: "Richard Kettelerij",
+        company: "Mindloops",
+        companyURL: "https://www.mindloops.nl",
+      },
+	  {
+        name: "Hylke van der Schaaf",
+        company: "Fraunhofer IOSB",
+        companyURL: "https://www.iosb.fraunhofer.de/",
       }
+
     ],
   // TODO: Vul de github URL in.
   //neem hier de URL van de github repository op waar het respec document in staat
