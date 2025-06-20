@@ -48,13 +48,13 @@ See the README in each repository for details.
 
 #### Demo of Dashboard application
 1. Selecting a specific sensor
-![](media/rq2/grafana-1.png =x250)
+![Selecting a specific sensor](media/rq2/grafana-1.png "Selecting a specific sensor")
 2. Select an area on the map and list sensor data.
-![](media/rq2/grafana-3.png =x500)
+![Select an area on the map and list sensor data](media/rq2/grafana-3.png "Select an area on the map and list sensor data")
 3. Show measurements of one or more sensors
-![](media/rq2/grafana-2.png =x1000)
+![Show measurements of one or more sensors](media/rq2/grafana-2.png "Show measurements of one or more sensors")
 4. Switch API source to use. Note: for the RIVM API the 'Use EWKT workaround' should be set on 'SRID=4326', while for the Fraunhofer API it should be empty.
-![](media/rq2/grafana-0.png)
+![Switch API source to use](media/rq2/grafana-0.png "Switch API source to use")
 
 #### Demo of Web viewer
 1. Selecting a specific sensor
