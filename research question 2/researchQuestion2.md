@@ -58,11 +58,11 @@ See the README in each repository for details.
 
 #### Demo of Web viewer
 1. Selecting a specific sensor
-![](media/rq2/viewer-1.png)
+![webviewer Selecting a specific sensor](media/rq2/viewer-1.png "Selecting a specific sensor")
 2. Select an area on the map and list sensor data.
-![](media/rq2/viewer-3.png)
+![webviewer Select an area on the map and list sensor data](media/rq2/viewer-3.png "Select an area on the map and list sensor data")
 3. Show measurements of one or more sensors
-![](media/rq2/viewer-2.png)
+![webviewer Show measurements of one or more sensors](media/rq2/viewer-2.png "Show measurements of one or more sensors")
 
 ### Findings
 
