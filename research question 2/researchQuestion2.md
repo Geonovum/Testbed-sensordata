@@ -29,7 +29,7 @@ This research is conducted by [Mindloops BV](https://mindloops.nl). Mindloops is
 
 The viewers communicate with a SensorThings API and allow users to select sensors and view measurements. As a data source we used the [RIVM SamenMeten SensorThings API](https://www.samenmeten.nl/international/API). To prove that our viewer is able to handle SensorThings API in a generic way we’ve also added the [Fraunhofer Airquality SensorThings API](https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/) (as a bonus).
 
-![](media/rq2/architecture.png)
+![Architecture](media/rq2/architecture.png "Architecture")
 
 We’ve applied a risk-driven approach in which we tackled the most complex things early on. This maximises the desired outcome within the available time. Also we used an iterative and agile approach with short feedback cycles to validate our results, which aligned with the bi-weekly meetings with GeoNovum.
 
