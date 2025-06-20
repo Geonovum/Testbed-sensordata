@@ -31,7 +31,7 @@ To this end implementations of standards realized within this testbed will be ke
 further experimentations for 6 months after the testbed ends.
 
 ## Use cases
-This section describes use cases that were employed within the testbed. T
+This section describes use cases that were employed within the testbed.
 
 ### Use case #1: RIVM air quality 
 
