@@ -14,10 +14,14 @@ The final issue we investigated in research question 3 "Initial device registrat
 # Future work
 As Geonovum we want to initiate the following follow-up actions now that the Testbed has ended:
 
-** Investigate the mapping issue further with Nelen & Schuurmans and their competitors. Can we find solutions that are acceptable and would make a mandatory standard for sensordata Feasible.
-** Discuss the results of the testbed with a broader group of stakeholders and at the very least Informatiehuis Water and het waterschapshuis.
-** Test the suitability Of sensorthings API and connected systems API for use in data science applications.
-** Test the suitability of connected systems API for dashboards and visualization
-** Do a hands on trial with initial device registration together with stakeholders from the dutch public sector using our own sensors.
+* Investigate the mapping issue further with Nelen & Schuurmans and their competitors. Can we find solutions that are acceptable and would make a mandatory standard for sensordata Feasible.
+
+* Discuss the results of the testbed with a broader group of stakeholders and at the very least Informatiehuis Water and het waterschapshuis.
+
+* Test the suitability Of sensorthings API and connected systems API for use in data science applications.
+
+* Test the suitability of connected systems API for dashboards and visualization
+
+* Do a hands on trial with initial device registration together with stakeholders from the dutch public sector using our own sensors.
 
 If you read this report and you are from the Dutch public sector and you have additional issues you would like to investigate or discuss with us, please contact Geonovum. All testbed implementations will remain available until at least the end of October. 
