@@ -1,6 +1,6 @@
 # Introduction
 
-Sensordata is becoming increasingly important in the Dutch public sector. Smart cities initiatives, citizen
+Sensordata is becoming increasingly important in the Dutch public sector. Smart city initiatives, citizen
 science projects as well as nationwide sensor networks for specific tasks (e.g. environmental monitoring)
 have been increasing the amount of sensordata available. Being able to make sense of this data and
 combining data from diverse source in applications such as digital twins is increasing the need to standardize
@@ -12,14 +12,11 @@ We want to explore how standards for sensors can help the public sector better o
 available sensordata.
 We want to address these questions based upon typical use cases and user questions we have identified.
 Geonovum, in line with its mission, is keen to get the answers; and it seeks to involve the market to do so.
-The actual questions and issues to be addressed are described in this document, combined into three
-research topics.
+The actual questions and issues to be addressed are described in this document, as well as the report on the answers, combined into three research topics.
 
 ## Scope
 
-In this testbed we are looking at implementing standards that apply to sensordata such as sensorthings API,
-connected systems API. We have two use cases including sensordata that can be used available to help
-anwser the questions.
+In this testbed we are looking at implementing standards that apply to sensordata such as [OGC SensorThings API](https://ogcapi.ogc.org/sensorthings/), [OGC API Connected Systems](https://ogcapi.ogc.org/connectedsystems/) and their collective underlying data model, [OGC Observations, Measurements and Samples](https://www.ogc.org/standards/om/). We have two use cases, including sensordata, that can be used to help anwser the questions.
 
 ## Outcome
 
@@ -39,11 +36,11 @@ This section describes use cases that were employed within the testbed.
 
 RIVM has the obligation, according to the EU legislation INSPIRE, to deliver the hourly air quality data for
 specific depositions. This data is generated out of the AQ database on a hourly basis, harvested with a
-python script and saved on the specific SOS inspire webserver. (https://inspire.rivm.nl/sos/eaq/#map)
-The SOS software was created by https://52north.org/ as a tool for ArcGIS Server and adapted for the RIVM
-to operate on a Apache Tomcat instance as Open Source Software tool (https://github.com/52North/SOS/).
+python script and saved on the specific [SOS inspire webserver](https://inspire.rivm.nl/sos/eaq/#map). 
+The [SOS software](https://github.com/52North/SOS/) was created by [52North](https://52north.org/) as a tool for ArcGIS Server and adapted for the RIVM
+to operate on a Apache Tomcat instance as Open Source Software tool.
 Since the implementation of the software in 2013 this software has never been down except for maintenance.
-To be future proof as an organization and to comply to the newer Open Standards available, we as RIVM
+To be future proof as an organization and to comply to the newer Open Standards available, RIVM
 would like to investigate the options, possibilities and risks to replace their SOS instance with a OGC
 SensorThings API standard, OGC connected systems API or even better an Observations Measurements and
 Sampling (OMS) solution.
@@ -53,23 +50,22 @@ Sampling (OMS) solution.
 In an effort to support citizen science in The Netherlands, RIVM also hosts the ‘Samen Meten’ platform: a
 data infrastructure that brings together official hourly air quality measurements and sensor-based civil
 measurements of local air quality. These sensor data are currently made available to the public through a
-STA v1.0 API server (https://api-samenmeten.rivm.nl/v1.0). A brief introduction to this service may be
+[STA v1.0 API server](https://api-samenmeten.rivm.nl/v1.0). A brief introduction to this service may be
 found at one of the following two webpages:
-• English: https://www.samenmeten.nl/international/API
-• Dutch: https://www.samenmeten.nl/dataportaal/api-application-programming-interface
-We offer this service as an example of how a STA can be used in practice and as a dataset to query or import
-as part of this testbed. Further, we would like to investigate how this API service could be improved to
-provide better metadata, for instance through an implementation of the STAplus extension (
-https://docs.ogc.org/is/22-022r1/22-022r1.html) or an exploration of appropriate metadata standards.
+- [English](https://www.samenmeten.nl/international/API)
+- [Dutch](https://www.samenmeten.nl/dataportaal/api-application-programming-interface)
+
+RIVM offers this service as an example of how a STA can be used in practice and as a dataset to query or import
+as part of this testbed. Further, RIVM would like to investigate how this API service could be improved to
+provide better metadata, for instance through an implementation of the [STAplus extension](https://docs.ogc.org/is/22-022r1/22-022r1.html) or an exploration of appropriate metadata standards.
 
 ### Use case #2 Municipality of Rotterdam
 
 The municipality of Rotterdam has a multitude of sensors transmitting on LoRa via chirpstack that produce
-raw JSON. These sensors measure groundwater levels, soil moisture, soil Ph and temperature, water leakage
-and in addition there are people counting sensors and 12-1 weather stations( that measure 12 weather
-related parameters). These are documented in more detail (including example JSON) in an attachment
-provided with this invitation to tender.
-They would like to gain experience in having these sensors exposed through interoperable standards such
+raw JSON. These sensors measure groundwater levels, soil moisture, soil Ph and temperature, water leakage;
+in addition there are people counting sensors as well as 12-1 weather stations, measuring 12 weather
+related parameters. These are documented in more detail (including example JSON) in an attachment
+provided with this invitation to tender. Rotterdam would like to gain experience in having these sensors exposed through interoperable standards such
 as Sensorthings API or connected systems API. 
 
 ## Research questions
@@ -103,5 +99,5 @@ a 3G network) specified in the firmware.
 When this connection is established, the thing must register itself with that service. The thing ‘comes ashore’
 for the first time.
 
-## reading guide
-The rest of this document contains the results of all three research topics.
+## Reading guide
+The rest of this document contains the results of all three research topics, written by the participants. It ends with the Conclusion chapter, which describes the main findings and the way forward as perceived by Geonovum.
