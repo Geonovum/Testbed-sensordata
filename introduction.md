@@ -2,14 +2,14 @@
 
 Sensordata is becoming increasingly important in the Dutch public sector. Smart city initiatives, citizen
 science projects as well as nationwide sensor networks for specific tasks (e.g. environmental monitoring)
-have been increasing the amount of sensordata available. Being able to make sense of this data and
+have been increasing the amount of available sensordata. Being able to make sense of this data and
 combining data from diverse source in applications such as digital twins is increasing the need to standardize
-sensordata. 
+sensorplatforms and sensordata. 
 
 ## Goal of the testbed
 
 We want to explore how standards for sensors can help the public sector better organize and leverage their
-available sensordata.
+available sensordata and sensorplatforms.
 We want to address these questions based upon typical use cases and user questions we have identified.
 Geonovum, in line with its mission, is keen to get the answers; and it seeks to involve the market to do so.
 The actual questions and issues to be addressed are described in this document, as well as the report on the answers, combined into three research topics.
