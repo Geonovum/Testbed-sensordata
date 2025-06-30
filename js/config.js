@@ -4,10 +4,10 @@ let respecConfig = {
   // title is verplicht! Neem hier de titel van het document op ----------------------
   title: "Testbed sensordata report",
   //-- specStatus is verplicht! (activeer 1 van de volgende) --------------------------
-  specStatus: "wv",                   // Werkversie
+  //specStatus: "wv",                   // Werkversie
   //specStatus: "cv",               // Consultatieversie
   //specStatus: "vv",               // Versie ter vaststelling
-  //specStatus: "def",              // Vastgestelde versie
+  specStatus: "def",              // Vastgestelde versie
   //specStatus: "basis",            // Basis Document
   //-- specType is verplicht bij alle andere dan BASIS ---------------------------------
   //specType: "NO",                 // Norm
@@ -34,7 +34,7 @@ let respecConfig = {
 
   //-- publishDate is verplicht -------------------------------------------------------
   //-- NB: in de werkversie uitzetten, want dan pakt Respec de pushdate ---------------
-  //publishDate: "2023-03-28",
+  publishDate: "2025-06-30",
   //eventueel is het mogelijk een versienummer mee te geven, maar bij Geonovum werken we gewoonlijk alleen met datum als onderdeel van de permanente URI.
   publishVersion: "0.0.1",
   //previousVersion: "0.0.1",
