@@ -39,8 +39,8 @@ let respecConfig = {
   //publishVersion: "0.0.1",
   //previousVersion: "0.0.1",
   //-- Voor dit blok geldt: alleen als er eerdere versies zijn en altijd beiden aan/uit! 
-  //previousPublishDate: "2014-05-01",
-  //previousMaturity: "CV",
+  previousPublishDate: "2025-06-30",
+  previousMaturity: "def",
   //latestVersion: "https://docs.geostandaarden.nl/ngii/testbed-sensordata",
   //thisVersion: "https://docs.geostandaarden.nl/ngii/def-al-testbed-sensordata-20250627/",
   //-- TODO: de namen van de Editor(s) / Redacteur(en)---------------------------------------
